@@ -1,0 +1,17 @@
+.DS_Store
+*.sw*
+log/*.log
+config/database.yml
+tmp/*
+db/*.sqlite*
+gems/*
+!gems/cache
+public/assets
+public/system
+public/uploads
+coverage
+.sass-cache
+.bundle-cache
+vendor/ruby
+vendor/local
+vendor/bundle
