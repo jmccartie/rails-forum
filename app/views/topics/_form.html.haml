@@ -1,0 +1,11 @@
+= simple_form_for(@topic) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :forum_id
+    = f.input :title
+    = f.input :user_id
+    = f.input :views
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @forum.name
+%p
+  %b Description:
+  = @forum.description
+
+= link_to 'Edit', edit_forum_path(@forum)
+\|
+= link_to 'Back', forums_path

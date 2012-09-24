@@ -1,0 +1,18 @@
+%h1 Welcome.
+
+%table
+  %tr
+    %th Forum
+    %th Topics
+    %th Posts
+    %th Last Post
+    %th
+
+  - @forums.each do |forum|
+    %tr
+      %td
+        = link_to forum.name, forum
+        = forum.description
+      %td NUM
+      %td NUM
+      %td DATE

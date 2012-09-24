@@ -1,0 +1,66 @@
+class ForumsController < ApplicationController
+  respond_to :html, :json
+
+  def index
+    @forums = Forum.includes(:topics).all
+    respond_with @forums
+  end
+
+  def show
+    @forum = Forum.find(params[:id])
+    respond_with @forum
+  end
+
+  def new
+    @forum = Forum.new
+  end
+
+  def edit
+    @forum = Forum.find(params[:id])
+  end
+
+  def create
+    @forum = Forum.new(params[:forum])
+
+    respond_to do |format|
+      if @forum.save
+        format.html { redirect_to @forum, notice: 'Forum was successfully created.' }
+        format.json { render json: @forum, status: :created, location: @forum }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @forum.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    @forum = Forum.find(params[:id])
+
+    respond_to do |format|
+      if @forum.update_attributes(params[:forum])
+        format.html { redirect_to @forum, notice: 'Forum was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @forum.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+  def destroy
+    @forum = Forum.find(params[:id])
+    @forum.destroy
+
+    respond_to do |format|
+      format.html { redirect_to forums_url }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+
+    def forum_params
+      params.require(:forum).permit(:name, :description)
+    end
+end
