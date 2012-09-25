@@ -2,7 +2,7 @@ class ForumsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @forums = Forum.includes(:topics).all
+    @forums = Forum.order(:name).includes(:topics).all
     respond_with @forums
   end
 

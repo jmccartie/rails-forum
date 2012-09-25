@@ -51,6 +51,11 @@
           %button.close{"data-dismiss" => "alert", :type => "button"} ×
           = alert
       =yield
+      %hr
+      %footer
+        Copyright &copy; #{Time.now.year} Robert Miramontes
+        \|
+        Created by #{link_to "Eruva", "http://www.eruva.com"}
 
 
   = javascript_include_tag "application"
