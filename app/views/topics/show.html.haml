@@ -17,7 +17,7 @@
         %br
         = post.user
       %td
-        = post.content
+        = post.content#.html_safe
         %br
         .pull-right
           Posted at: #{post.created_at}

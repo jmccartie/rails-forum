@@ -12,4 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require ./wysihtml5-parser-rules
+//= require_tree ./lib
 //= require_tree .

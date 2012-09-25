@@ -42,6 +42,7 @@ namespace :import do
         created_at: Time.at(user.user_regdate.to_i),
         updated_at: Time.at(user.user_regdate.to_i)
       })
+        user.confirm!
       rescue Exception => e
         puts "ERROR: #{e}"
       end

@@ -20,6 +20,7 @@ gem 'devise'
 gem 'haml-rails'
 gem "cancan"
 gem "will_paginate"
+gem "md_emoji"
 
 gem "hashie" # Needed for import
 

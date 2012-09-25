@@ -2,7 +2,8 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :content
+    = render "application/wysihtml"
+    = f.input :content, :input_html => {id: "wysihtml5-textarea", autofocus: true}
 
   .form-actions
     = f.button :submit
