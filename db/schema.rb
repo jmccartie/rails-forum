@@ -11,14 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120925021121) do
+ActiveRecord::Schema.define(:version => 20120925042301) do
 
   create_table "forums", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "import_id"
   end
+
+  add_index "forums", ["import_id"], :name => "index_forums_on_import_id"
 
   create_table "posts", :force => true do |t|
     t.integer  "topic_id"
@@ -26,7 +29,10 @@ ActiveRecord::Schema.define(:version => 20120925021121) do
     t.text     "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "import_id"
   end
+
+  add_index "posts", ["import_id"], :name => "index_posts_on_import_id"
 
   create_table "topics", :force => true do |t|
     t.integer  "forum_id"
@@ -36,7 +42,10 @@ ActiveRecord::Schema.define(:version => 20120925021121) do
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
     t.integer  "posts_count", :default => 0, :null => false
+    t.integer  "import_id"
   end
+
+  add_index "topics", ["import_id"], :name => "index_topics_on_import_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
@@ -57,9 +66,11 @@ ActiveRecord::Schema.define(:version => 20120925021121) do
     t.string   "username",                                  :null => false
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
+    t.integer  "import_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["import_id"], :name => "index_users_on_import_id"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

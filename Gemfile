@@ -21,6 +21,8 @@ gem 'haml-rails'
 gem "cancan"
 gem "will_paginate"
 
+gem "hashie" # Needed for import
+
 group :test do
   gem 'database_cleaner'
   gem 'capybara'
