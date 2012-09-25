@@ -8,7 +8,7 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @posts = @topic.posts.includes(:user).paginate(page: params[:page])
+    @posts = @topic.posts.order(:created_at).includes(:user).paginate(page: params[:page])
     @topic.increment!(:views)
     respond_with @topic
   end
