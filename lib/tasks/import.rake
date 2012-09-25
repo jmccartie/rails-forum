@@ -25,6 +25,8 @@ namespace :import do
 
   desc "Import Users"
   task :users => :environment do
+    User.destroy_all
+
     users = csv_to_hash("phpbb3_users.csv")
 
     users.each do |user|
