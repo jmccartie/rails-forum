@@ -28,13 +28,28 @@
             %span.icon-bar
           = link_to "SoCalBouldering", root_path, class: "brand"
           .nav-collapse.collapse
-            %ul.nav
-              %li.active
-                %a{:href => "#about"} About
-              %li
-                %a{:href => "#contact"} Contact
+            / %ul.nav
+            /   %li.active
+            /     %a{:href => "#about"} About
+            /   %li
+            /     %a{:href => "#contact"} Contact
+            %ul.nav.pull-right
+              - if user_signed_in?
+                %li= link_to "Welcome, #{current_user.username}", edit_registration_path(current_user)
+                %li= link_to "Sign out", destroy_user_session_path, method: :delete
+              - else
+                %li= link_to "Sign up", new_user_registration_path
+                %li= link_to "Sign in", new_user_session_path
           / /.nav-collapse
     .container
+      - if notice
+        .alert.alert-success
+          %button.close{"data-dismiss" => "alert", :type => "button"} ×
+          = notice
+      - if alert
+        .alert.alert-error
+          %button.close{"data-dismiss" => "alert", :type => "button"} ×
+          = alert
       =yield
 
 

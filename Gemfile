@@ -19,14 +19,16 @@ gem 'simple_form'
 gem 'devise'
 gem 'haml-rails'
 gem "cancan"
+gem "will_paginate"
 
 group :test do
-  gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'capybara'
   gem 'rspec-rails'
 end
 
 group :test, :development do
-	gem 'pry-rails'
+  gem 'pry-rails'
+  gem "faker"
+  gem 'factory_girl_rails'
 end

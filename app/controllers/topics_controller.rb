@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   respond_to :html, :json
-  before_fitler :load_data
+  before_filter :load_data
 
   def index
     @topics = @forum.topics
@@ -8,24 +8,30 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find(params[:id])
+    @posts = @topic.posts.includes(:user).paginate(page: params[:page])
     @topic.increment!(:views)
     respond_with @topic
   end
 
   def new
     @topic = Topic.new
+    @post = @topic.posts.new
   end
 
   def edit
   end
 
   def create
-    @topic = Topic.new(params[:topic])
+    params[:topic][:posts_attributes].each do |k, v|
+      params[:topic][:posts_attributes][k]["user_id"] = current_user.id
+    end
+
+    @topic = @forum.topics.new(params[:topic])
+    @topic.user_id = current_user.id
 
     respond_to do |format|
       if @topic.save
-        format.html { redirect_to @topic, notice: 'Topic was successfully created.' }
+        format.html { redirect_to [@forum, @topic], notice: 'Topic was successfully created.' }
         format.json { render json: @topic, status: :created, location: @topic }
       else
         format.html { render action: "new" }
@@ -66,7 +72,7 @@ class TopicsController < ApplicationController
     end
 
     def topic_params
-      params.require(:topic).permit(:title)
+      params.require(:topic).permit(:title, posts: [:content])
     end
 
 end

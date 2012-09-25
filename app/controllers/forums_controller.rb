@@ -8,6 +8,7 @@ class ForumsController < ApplicationController
 
   def show
     @forum = Forum.find(params[:id])
+    @topics = @forum.topics.order("created_at DESC").paginate(page: params[:page])
     respond_with @forum
   end
 

@@ -1,18 +1,31 @@
-%p#notice= notice
+%h2= @topic.title
 
-%p
-  %b Forum:
-  = @topic.forum_id
-%p
-  %b Title:
-  = @topic.title
-%p
-  %b User:
-  = @topic.user_id
-%p
-  %b Views:
-  = @topic.views
+.breadcrumbs
+  = link_to @topic.forum.name, @forum
 
-= link_to 'Edit', edit_topic_path(@topic)
-\|
-= link_to 'Back', topics_path
+- if can? :create, Post
+  = link_to "Post Reply", new_forum_topic_post_path(@forum, @topic)
+
+%table.table.table-striped.table-bordered
+  %tr
+    %th Author
+    %th Message
+  - @posts.each do |post|
+    %tr
+      %td
+        = gravatar_for(post.user)
+        %br
+        = post.user
+      %td
+        = post.content
+        %br
+        .pull-right
+          Posted at: #{post.created_at}
+          %br
+          - if can? :manage, post
+            %br
+            = link_to "Edit post", edit_forum_topic_post_path(@forum, @topic, post)
+
+
+
+= will_paginate @posts

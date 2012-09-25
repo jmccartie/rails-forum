@@ -1,12 +1,25 @@
-%p#notice= notice
+%h1= @forum.name
 
-%p
-  %b Name:
-  = @forum.name
-%p
-  %b Description:
-  = @forum.description
+- if can? :create, Topic
+  .pull-right
+    = link_to 'New Topic', new_forum_topic_path(@forum)
+    - if can? :manage, Forum
+      \|
+      = link_to 'Edit Forum', edit_forum_path(@forum)
 
-= link_to 'Edit', edit_forum_path(@forum)
-\|
-= link_to 'Back', forums_path
+%table.table.table-striped.table-bordered
+  %tr
+    %th Topics
+    %th Author
+    %th Replies
+    %th Views
+    %th Last Post
+  - @topics.each do |topic|
+    %tr
+      %td= link_to topic.title, [@forum, topic]
+      %td= topic.user.username
+      %td= topic.posts.count
+      %td= topic.views
+      %td= topic.last_post.created_at rescue "---"
+
+= will_paginate @topics

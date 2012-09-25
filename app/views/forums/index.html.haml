@@ -1,18 +1,22 @@
 %h1 Welcome.
 
-%table
+%table.table.table-striped.table-bordered
   %tr
     %th Forum
     %th Topics
     %th Posts
     %th Last Post
-    %th
 
   - @forums.each do |forum|
     %tr
       %td
         = link_to forum.name, forum
+        %br
         = forum.description
-      %td NUM
-      %td NUM
-      %td DATE
+      %td= forum.topics.count
+      %td= forum.topics.sum(:posts_count)
+      %td= forum.topics.order("updated_at DESC").first.updated_at rescue "---"
+
+%br
+- if can? :create, Forum
+  = link_to "New forum", new_forum_path

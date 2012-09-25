@@ -1,9 +1,7 @@
-= simple_form_for(@post) do |f|
+= simple_form_for([@forum, @topic, @post]) do |f|
   = f.error_notification
 
   .form-inputs
-    = f.input :topic_id
-    = f.input :user_id
     = f.input :content
 
   .form-actions
