@@ -1,9 +1,13 @@
-= simple_form_for([@forum, @topic, @post]) do |f|
-  = f.error_notification
+= form_for([@forum, @topic, @post]) do |f|
+  - if @post.errors.any?
+    #errorExplanation.errorExplanation
+      - @post.errors.full_messages.each do |msg|
+        %p.text-error= msg
 
   .form-inputs
     = render "application/wysihtml"
-    = f.input :content, :input_html => {id: "wysihtml5-textarea", autofocus: true}
+    = f.text_area :content, id: "wysihtml5-textarea"
+    -#= f.input :content, :label => nil, :required => false, :input_html => {id: "wysihtml5-textarea", autofocus: true}
 
   .form-actions
-    = f.button :submit
+    %button.btn Create Post

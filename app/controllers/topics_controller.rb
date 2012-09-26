@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
   respond_to :html, :json
   before_filter :load_data
+  load_and_authorize_resource except: [:index, :show]
 
   def index
     @topics = @forum.topics
@@ -45,7 +46,7 @@ class TopicsController < ApplicationController
 
     respond_to do |format|
       if @topic.update_attributes(params[:topic])
-        format.html { redirect_to @topic, notice: 'Topic was successfully updated.' }
+        format.html { redirect_to [@forum, @topic], notice: 'Topic was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -60,7 +61,7 @@ class TopicsController < ApplicationController
     @topic.destroy
 
     respond_to do |format|
-      format.html { redirect_to topics_url }
+      format.html { redirect_to forum_url(@topic.forum) }
       format.json { head :no_content }
     end
   end

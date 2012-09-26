@@ -114,7 +114,7 @@ namespace :import do
   task :posts => :environment do
     ActiveRecord::Base.record_timestamps = false
 
-    Post.destroy_all
+    Post.delete_all
     posts = YAML::load(File.open("#{Rails.root}/lib/tasks/import_csvs/phpbb3_posts.yml"))
 
     posts.each do |post|
@@ -123,13 +123,20 @@ namespace :import do
         clean_content = post["post_text"]
 
         # # [quote]
-        clean_content.gsub!(/\[quote(?:.*)\](.*?)\[\/quote(?:.*)\]/, "<blockquote>\\1</blockquote>")
+        clean_content.gsub!(/\[quote(?:.*)\](.*?)\[\/quote(?:.*)\]/, "<pre>\\1</pre>")
 
         # # [img]
         clean_content.gsub!(/\[img(?:.*)\](.*?)\[\/img(?:.*)\]/, "<img src='\\1' />")
 
         # # emoji
         clean_content.gsub!(/<!-- (.*?) -->(?:.*)<!-- (?:.*) -->/, ":\\1:")
+
+        clean_content.gsub!(/:sevilsonic:/, ":smiling_imp:")
+        clean_content.gsub!(/:smadcat in hat:/, ":sunglasses:")
+        clean_content.gsub!(/:sjoe1:/, ":sunglasses:")
+
+        # urls
+        clean_content.gsub!(/\[url(?:.*)\](.*?)\[\/url(?:.*)\]/, "<a href='\\1'>\\1</a>")
 
         # clean_content.gsub(/<!-- (?:.*) --><img src=\\"{SMILIES_PATH}\/([\w-]+)\.[a-z]+(?:.*)<!-- (?:.*) -->/, ":" + $1 + ":")
         # <!-- (?:.*) --><img src=\\"{SMILIES_PATH}\/([\w-]+)\.[a-z]+(?:.*)<!-- (?:.*) -->

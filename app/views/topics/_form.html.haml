@@ -1,10 +1,18 @@
-= simple_form_for([@forum, @topic], html: {class: "form-horizontal"}) do |f|
-  = f.error_notification
+= form_for([@forum, @topic]) do |f|
+  - if @topic.errors.any?
+    #errorExplanation.errorExplanation
+      - @topic.errors.full_messages.each do |msg|
+        %p.text-error= msg
 
   .form-inputs
-    = f.input :title
-    = f.simple_fields_for :posts, @post do |posts_form|
-      = posts_form.input :content, input_html: {rows: 20}
+    = f.label :title
+    = f.text_field :title
+
+  - if @topic.new_record?
+    .form-inputs{style: "margin-top: 20px"}
+      = f.fields_for :posts, @post do |posts_form|
+        = render "application/wysihtml"
+        = posts_form.text_area :content, id: "wysihtml5-textarea"
 
   .form-actions
-    = f.button :submit
+    %button.btn Create Topic

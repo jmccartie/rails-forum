@@ -1,6 +1,5 @@
 %h2= @topic.title
 
-
 %ul.breadcrumb
   %li
     = link_to "Home", root_path
@@ -9,7 +8,12 @@
     = link_to @topic.forum.name, @forum
 
 - if can? :create, Post
-  = link_to "Post Reply", new_forum_topic_post_path(@forum, @topic)
+  .pull-right
+    = link_to "Post Reply", new_forum_topic_post_path(@forum, @topic)
+    - if can? :manage, @topic
+      \|
+      = link_to "Edit Topic", edit_forum_topic_path(@forum, @topic)
+
 
 %table#posts.table.table-striped.table-bordered
   %tr
@@ -18,7 +22,7 @@
   - @posts.each do |post|
     %tr
       %td
-        = gravatar_for(post.user)
+        = gravatar_for(post.user, 100)
         %br
         = post.user
       %td
@@ -35,6 +39,7 @@
               #{time_ago_in_words(post.created_at)} ago
 
 
-
+- if can? :create, Post
+  .pull-right= link_to "Post Reply", new_forum_topic_post_path(@forum, @topic)
 
 = will_paginate @posts

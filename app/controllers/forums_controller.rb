@@ -1,5 +1,6 @@
 class ForumsController < ApplicationController
   respond_to :html, :json
+  load_and_authorize_resource except: [:index, :show]
 
   def index
     @forums = Forum.order(:name).includes(:topics).all
@@ -17,7 +18,6 @@ class ForumsController < ApplicationController
   end
 
   def edit
-    @forum = Forum.find(params[:id])
   end
 
   def create
@@ -35,8 +35,6 @@ class ForumsController < ApplicationController
   end
 
   def update
-    @forum = Forum.find(params[:id])
-
     respond_to do |format|
       if @forum.update_attributes(params[:forum])
         format.html { redirect_to @forum, notice: 'Forum was successfully updated.' }
@@ -50,7 +48,6 @@ class ForumsController < ApplicationController
 
 
   def destroy
-    @forum = Forum.find(params[:id])
     @forum.destroy
 
     respond_to do |format|

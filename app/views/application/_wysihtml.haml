@@ -1,14 +1,10 @@
 #wysihtml5-toolbar{:style => "display: none;"}
   %a{"data-wysihtml5-command" => "bold"} Bold
   %a{"data-wysihtml5-command" => "italic"} Italic
-  / Some wysihtml5 commands require extra parameters
-  / %a{"data-wysihtml5-command" => "foreColor", "data-wysihtml5-command-value" => "red"} red
-  / %a{"data-wysihtml5-command" => "foreColor", "data-wysihtml5-command-value" => "green"} green
-  / %a{"data-wysihtml5-command" => "foreColor", "data-wysihtml5-command-value" => "blue"} blue
   %a{"data-wysihtml5-command" => "insertUnorderedList"} Bullets
   %a{"data-wysihtml5-command" => "insertOrderedList"} Numbers
   %a{"data-wysihtml5-command" => "pre"} Quote
-  / Some wysihtml5 commands like 'createLink' require extra paramaters specified by the user (eg. href)
+  / %br
   / %a{"data-wysihtml5-command" => "createLink"} insert link
   / %div{"data-wysihtml5-dialog" => "createLink", :style => "display: none;"}
   /   %label
@@ -16,3 +12,13 @@
   /     %input.text{"data-wysihtml5-dialog-field" => "href", :value => "http://"}
   /   %a{"data-wysihtml5-dialog-action" => "save"} OK
   /   %a{"data-wysihtml5-dialog-action" => "cancel"} Cancel
+  %a{"data-wysihtml5-command" => "insertImage"} insert image
+  %div{"data-wysihtml5-dialog" => "insertImage", style: "display:none;"}
+    %label
+      Image:
+      %input{"data-wysihtml5-dialog-field" => "src", :value => "http://"}
+    %a{"data-wysihtml5-dialog-action" => "save"} OK
+    %a{"data-wysihtml5-dialog-action" => "cancel"} Cancel
+
+  .pull-right
+    %a{"data-wysihtml5-action" => "change_view", :href => "javascript:;"} switch to html view

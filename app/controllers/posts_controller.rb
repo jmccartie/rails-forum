@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   respond_to :html, :json
   before_filter :load_data
+  load_and_authorize_resource except: [:index, :show]
 
   def index
     @posts = @topic.posts
@@ -54,7 +55,7 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to [@forum, @topic], notice: "Post deleted." }
       format.json { head :no_content }
     end
   end

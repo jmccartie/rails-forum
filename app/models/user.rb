@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :topics
-  has_many :posts, :dependent => :destroy
+  has_many :posts, :inverse_of => :user, :dependent => :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
