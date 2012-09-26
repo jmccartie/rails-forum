@@ -21,8 +21,7 @@ gem 'haml-rails'
 gem "cancan"
 gem "will_paginate"
 gem "md_emoji"
-
-gem "hashie" # Needed for import
+gem "rails_config"
 
 group :test do
   gem 'database_cleaner'

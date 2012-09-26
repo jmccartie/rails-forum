@@ -16,16 +16,7 @@
     / Le HTML5 shim, for IE6-8 support of HTML5 elements
     /[if lt IE 9]
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    :javascript
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-33657260-4']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+    = render "application/google_analytics"
 
   %body.container-fluid
     .navbar.navbar-inverse.navbar-fixed-top
@@ -35,7 +26,7 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          = link_to "SoCalBouldering", root_path, class: "brand"
+          = link_to Settings.site_title, root_path, class: "brand"
           .nav-collapse.collapse
             / %ul.nav
             /   %li.active
@@ -63,9 +54,7 @@
       .row=yield
       %hr
       %footer
-        Copyright &copy; #{Time.now.year} Robert Miramontes
-        \|
-        Created by #{link_to "Eruva", "http://www.eruva.com"}
+        Copyright &copy; #{Time.now.year} - #{Settings.owner_name}
 
 
   = javascript_include_tag "application"
