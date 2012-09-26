@@ -61,7 +61,7 @@ Socalbouldering::Application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   ### ActionMailer Config
   # Setup for production - deliveries, no errors raised
-  config.action_mailer.delivery_method        = :sendmail
+  # config.action_mailer.delivery_method        = :sendmail
   config.action_mailer.perform_deliveries     = true
   config.action_mailer.raise_delivery_errors  = false
   config.action_mailer.default :charset => "utf-8"
@@ -74,7 +74,7 @@ Socalbouldering::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  ActionMailer::Base.smtp_settings = {
+  config.action_mailer.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
     :port           => '587',
     :authentication => :plain,
@@ -82,5 +82,5 @@ Socalbouldering::Application.configure do
     :password       => ENV['SENDGRID_PASSWORD'],
     :domain         => 'heroku.com'
   }
-  ActionMailer::Base.delivery_method = :smtp
+  config.action_mailer.delivery_method = :smtp
 end
