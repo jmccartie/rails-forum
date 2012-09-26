@@ -1,12 +1,17 @@
 %h2= @topic.title
 
-.breadcrumbs
-  = link_to @topic.forum.name, @forum
+
+%ul.breadcrumb
+  %li
+    = link_to "Home", root_path
+    %span.divider /
+  %li
+    = link_to @topic.forum.name, @forum
 
 - if can? :create, Post
   = link_to "Post Reply", new_forum_topic_post_path(@forum, @topic)
 
-%table.table.table-striped.table-bordered
+%table#posts.table.table-striped.table-bordered
   %tr
     %th Author
     %th Message
@@ -19,13 +24,16 @@
       %td
         - markdown = Redcarpet::Markdown.new(MdEmoji::Render, :no_intra_emphasis => true)
         != markdown.render(post.content)
-        %br
-        .pull-right
-          Posted at: #{post.created_at}
-          %br
+        .pull-left.post-details
           - if can? :manage, post
-            %br
             = link_to "Edit post", edit_forum_topic_post_path(@forum, @topic, post)
+        .pull-right.post-details
+          %span.label
+            - if post.created_at <= 3.days.ago
+              = l(post.created_at, format: :medium)
+            - else
+              #{time_ago_in_words(post.created_at)} ago
+
 
 
 

@@ -33,7 +33,7 @@ namespace :import do
     users.each do |user|
 
       begin
-        user = User.create!({
+        user = User.new({
         username: user.username,
         email: user.user_email,
         admin: user.group_id.to_i == 9,
@@ -42,7 +42,8 @@ namespace :import do
         created_at: Time.at(user.user_regdate.to_i),
         updated_at: Time.at(user.user_regdate.to_i)
       })
-        user.confirm!
+        user.skip_confirmation!
+        user.save!
       rescue Exception => e
         puts "ERROR: #{e}"
       end
@@ -117,17 +118,33 @@ namespace :import do
     posts = YAML::load(File.open("#{Rails.root}/lib/tasks/import_csvs/phpbb3_posts.yml"))
 
     posts.each do |post|
+
       begin
+        clean_content = post["post_text"]
+
+        # # [quote]
+        clean_content.gsub!(/\[quote(?:.*)\](.*?)\[\/quote(?:.*)\]/, "<blockquote>\\1</blockquote>")
+
+        # # [img]
+        clean_content.gsub!(/\[img(?:.*)\](.*?)\[\/img(?:.*)\]/, "<img src='\\1' />")
+
+        # # emoji
+        clean_content.gsub!(/<!-- (.*?) -->(?:.*)<!-- (?:.*) -->/, ":\\1:")
+
+        # clean_content.gsub(/<!-- (?:.*) --><img src=\\"{SMILIES_PATH}\/([\w-]+)\.[a-z]+(?:.*)<!-- (?:.*) -->/, ":" + $1 + ":")
+        # <!-- (?:.*) --><img src=\\"{SMILIES_PATH}\/([\w-]+)\.[a-z]+(?:.*)<!-- (?:.*) -->
+
+
         Post.create!({
           topic_id: Topic.find_by_import_id(post["topic_id"]).id,
           user_id: User.find_by_import_id(post["poster_id"]).id,
-          content: post["post_text"],
+          content: clean_content,
           created_at: Time.at(post["post_time"].to_i),
           updated_at: Time.at(post["post_time"].to_i),
           import_id: post["post_id"]
         })
       rescue Exception => e
-        puts "==> \n#{e}\n"
+        puts "\n==> #{e}\n"
       end
       print "."
     end

@@ -20,6 +20,6 @@
       %td= topic.user.username
       %td= topic.posts.count
       %td= topic.views
-      %td= topic.last_post.created_at rescue "---"
+      %td= l(topic.last_post.created_at, format: :medium) rescue "---"
 
 = will_paginate @topics

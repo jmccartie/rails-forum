@@ -3,3 +3,9 @@
 
 en:
   hello: "Hello world"
+  time:
+    formats:
+      medium: "%b %d, %Y at %l:%M%p"
+  date:
+    formats:
+      medium: "%b %d, %Y"
