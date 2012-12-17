@@ -1,0 +1,17 @@
+# PostgreSQL. Versions 8.2 and up are supported.
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: rails_forum_development
+  pool: 5
+  username: dev
+  password:
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: rails_forum_test
+  pool: 5
+  username: dev
+  password:

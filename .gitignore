@@ -1,7 +1,6 @@
 .DS_Store
 *.sw*
 log/*.log
-config/database.yml
 tmp/*
 db/*.sqlite*
 gems/*
