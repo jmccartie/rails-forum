@@ -4,6 +4,10 @@ Basic online forum.  Uses Devise, Cancan, Twitter Bootstrap, Rails Config, Simpl
 
 Originally developed as a replacement for an old phpBB app.
 
+# Tests
+
+![](https://api.travis-ci.org/jmccartie/rails-forum.png)
+
 # Contributing
 
 In the spirit of [free software](http://www.fsf.org/licensing/essays/free-sw.html), **everyone** is encouraged to help improve this project.
