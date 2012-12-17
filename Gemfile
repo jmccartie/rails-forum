@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.9'
 gem 'thin'
 gem 'pg'
 
@@ -32,5 +32,14 @@ end
 group :test, :development do
   gem 'pry-rails'
   gem "faker"
-  gem 'factory_girl_rails'
+  gem 'rspec-rails'
+  gem "factory_girl_rails", "~> 4.0.0"
+  gem 'guard', "~> 1.5.3"
+  gem "guard-spork"
+  gem 'guard-rails'
+  gem 'guard-rspec'
+  gem "capybara"
+  gem 'database_cleaner'
+  gem 'faker'
+  gem 'rb-fsevent', '~> 0.9.1'
 end
