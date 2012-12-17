@@ -1,8 +1,12 @@
-before_script:
-  - psql -c 'create database rails_forum_test;' -U postgres
 rvm:
   - 1.9.3
 bundler_args: --without development:production
 env:
   - RACK_ENV=test
-script: "bundle exec rake spec"
+  - DB=postgresql
+script:
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare
+  - bundle exec rspec spec/
+before_script:
+  - psql -c 'create database rails_forum_test' -U postgres
