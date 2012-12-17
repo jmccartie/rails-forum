@@ -5,7 +5,7 @@ development:
   encoding: unicode
   database: rails_forum_development
   pool: 5
-  username: dev
+  username: postgres
   password:
 
 test:
@@ -13,5 +13,5 @@ test:
   encoding: unicode
   database: rails_forum_test
   pool: 5
-  username: dev
+  username: postgres
   password:

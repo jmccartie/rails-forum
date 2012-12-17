@@ -1,3 +1,5 @@
+before_script:
+  - psql -c 'create database rails_forum_test;' -U postgres
 rvm:
   - 1.9.3
 bundler_args: --without development:production
