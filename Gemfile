@@ -9,7 +9,8 @@ group :assets do
   gem 'coffee-rails', '~> 4.0.0'
   gem 'uglifier', '>= 1.0.3'
   gem 'bootstrap-sass'
-  gem 'compass-rails'
+  gem "compass-rails", github: "milgner/compass-rails", branch: "rails4"
+
 end
 
 gem 'jquery-rails'
