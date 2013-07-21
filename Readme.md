@@ -4,6 +4,10 @@ Basic online forum.  Uses Devise, Cancan, Twitter Bootstrap, Rails Config, Simpl
 
 Originally developed as a replacement for an old phpBB app.
 
+# Running
+
+Make sure to set ENV['SECRET_TOKEN'], otherwise your users will be logged out between each deploy.
+
 # Tests
 
 ![](https://api.travis-ci.org/jmccartie/rails-forum.png)

@@ -3,7 +3,7 @@ class ForumsController < ApplicationController
   load_and_authorize_resource except: [:index, :show]
 
   def index
-    @forums = Forum.order(:name).includes(:topics).all
+    @forums = Forum.order(:name).includes(:topics)
     respond_with @forums
   end
 
