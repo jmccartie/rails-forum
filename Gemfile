@@ -19,7 +19,7 @@ gem 'jquery-rails'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 gem 'devise'
 gem 'haml-rails'
-gem "cancan"
+gem "cancan", :git => 'https://github.com/ryanb/cancan.git'
 gem "will_paginate"
 gem "md_emoji"
 gem "rails_config"
