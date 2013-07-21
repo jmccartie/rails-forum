@@ -11,6 +11,7 @@ class Ability
       can :manage, Post, :user_id => user.id
       can :create, Post
       can :manage, Topic, :user_id => user.id
+      can :manage, Topic, :all
       can :manage, User, :id => user.id
     else
       can :read, :all

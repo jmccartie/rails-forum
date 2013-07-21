@@ -27,7 +27,7 @@ class TopicsController < ApplicationController
       params[:topic][:posts_attributes][k]["user_id"] = current_user.id
     end
 
-    @topic = @forum.topics.new(params[:topic])
+    @topic = @forum.topics.new(topic_params)
     @topic.user_id = current_user.id
 
     respond_to do |format|
@@ -45,7 +45,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
 
     respond_to do |format|
-      if @topic.update_attributes(params[:topic])
+      if @topic.update_attributes(topic_params)
         format.html { redirect_to [@forum, @topic], notice: 'Topic was successfully updated.' }
         format.json { head :no_content }
       else
