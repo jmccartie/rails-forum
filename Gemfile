@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '4.0.0'
 gem 'thin'
 gem 'pg'
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails',   '~> 4.0.0'
+  gem 'coffee-rails', '~> 4.0.0'
   gem 'uglifier', '>= 1.0.3'
   gem 'bootstrap-sass'
   gem 'compass-rails'
@@ -14,8 +14,7 @@ end
 
 gem 'jquery-rails'
 
-gem "strong_parameters", "~> 0.1.4"
-gem 'simple_form'
+gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 gem 'devise'
 gem 'haml-rails'
 gem "cancan"
